@@ -18,12 +18,10 @@ RobotNetwork::RobotNetwork(int n):
 	num_robots(n),
 	steps_to_success(0)
 {
-	Robot bot(0,0,0,GRID_SIZE);
-	std::vector< Robot > bots(num_robots, bot);
-	robots = bots;
+	Robot** bot = new Robot*(0,0,0,GRID_SIZE)[num_robots];
 	for(int i = 0; i < num_robots; i++){
 		robots[i].setX(i);
-		std::cout << "Robot " << i << " (" << robots[i].x << "," << robots[i].y << ")\n";
+		std::cout << "Robot 0" << " (" << robots[0].x << "," << robots[0].y << ")\n";
 		world_grid.changeCellValue(i,0,1);
 		robots[i].robot_grid.changeCellValue(i,0,1);
 		pulseSensor(robots[i].x, robots[i].y, SENSOR_RANGE, i);
