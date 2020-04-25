@@ -10,7 +10,3 @@ Robot::Robot(int x, int y, int state, int sz):
 Robot::Robot():
 	robot_grid(1)
 {}
-
-void Robot::setX(int x){
-	this->x = x;
-}

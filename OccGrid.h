@@ -7,6 +7,7 @@ class OccGrid {
 private:
 	int size;
 	int** grid;
+	bool checkFrontier(int x, int y);
 
 public:
 	OccGrid();
@@ -17,6 +18,7 @@ public:
 	void changeCellValue(int x, int y, int val);
 	bool gridExplored();
 	int getCellValue(int x, int y);
+	void findFrontiers();
 };
 
 #endif

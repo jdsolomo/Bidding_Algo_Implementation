@@ -8,7 +8,6 @@ public:
 	OccGrid robot_grid;
 	Robot();
 	Robot(int x, int y, int state, int sz);
-	void setX(int x);
 };
 
 #endif

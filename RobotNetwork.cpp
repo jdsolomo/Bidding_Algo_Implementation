@@ -63,13 +63,11 @@ void RobotNetwork::exploreGrid_Random(){
 	}
 
 	std::cout << "It took RANDOM algorithm " << steps_to_success << " steps to cover the space.\n";
-	for(int i = 0; i < num_robots; i++){
-		std::cout << "Robot " << i << " Map: \n";
-		robots[i]->robot_grid.printGrid();
-	}
 }
 
+// Check if robot r's move is valid and update map accordingly
 bool RobotNetwork::updateMap(int r){
+	// Check if the robot is going to collide with another robot
 	for(int i = 0; i < num_robots; i++){
 		if(r != i && robots[i]->x == robots[r]->x && robots[i]->y == robots[r]->y){
 			if(robots[r]->state == 1){
@@ -87,6 +85,7 @@ bool RobotNetwork::updateMap(int r){
 			return false;
 		}
 	}
+	// Check that the robot is within the bounds of the map
 	if(robots[r]->x == GRID_SIZE){
 		robots[r]->x--;
 		return false;
@@ -103,9 +102,19 @@ bool RobotNetwork::updateMap(int r){
 		robots[r]->y++;
 		return false;
 	}
+
+	// Update maps and have robot takes sensor measurements
 	world_grid.changeCellValue(robots[r]->x, robots[r]->y, 1);
 	robots[r]->robot_grid.changeCellValue(robots[r]->x, robots[r]->y, 1);
 	pulseSensor(robots[r]->x, robots[r]->y, SENSOR_RANGE, r);
+	robots[r]->robot_grid.findFrontiers();
+	world_grid.findFrontiers();
+
+	std::cout << "World Map:\n";
+	world_grid.printGrid();
+	std::cout << "Robot " << r << " Map:\n";
+	robots[r]->robot_grid.printGrid();
+
 	return true;
 }
 

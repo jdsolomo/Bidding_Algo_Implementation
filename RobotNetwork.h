@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define GRID_SIZE 15
+#define GRID_SIZE 5
 #define SENSOR_RANGE 3
 
 class RobotNetwork: public Robot {
