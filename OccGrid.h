@@ -12,11 +12,11 @@ public:
 	OccGrid();
 	~OccGrid();
 	OccGrid(int sz);
+	OccGrid(const OccGrid& occ);
 	void printGrid();
 	void changeCellValue(int x, int y, int val);
 	bool gridExplored();
 	int getCellValue(int x, int y);
-	void setSize(int sz);
 };
 
 #endif

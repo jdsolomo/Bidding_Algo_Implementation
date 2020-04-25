@@ -30,6 +30,20 @@ OccGrid::OccGrid(int sz):
 	}
 }
 
+OccGrid::OccGrid(const OccGrid& occ):
+	size(occ.size)
+{
+	grid = new int*[size];
+	for(int i = 0; i < size; i++){
+		grid[i] = new int[size];
+	}
+	for(int i = 0; i < size; i++){
+		for(int j = 0; j < size; j++){
+			grid[i][j] = occ.grid[i][j];
+		}
+	}
+}
+
 // Deallocate occupancy grid
 OccGrid::~OccGrid(){
 	for(int i = 0; i < size; i++){
@@ -75,25 +89,4 @@ bool OccGrid::gridExplored(){
 
 int OccGrid::getCellValue(int x, int y){
 	return grid[x][y];
-}
-
-void OccGrid::setSize(int sz){
-	for(int i = 0; i < size; i++){
-		delete grid[i];
-	}
-	delete grid;
-
-	size = sz;
-	int** new_grid = new int*[size];
-	for(int i = 0; i < size; i++){
-		new_grid[i] = new int[size];
-	}
-
-	grid = new_grid;
-
-	for(int i = 0; i < size; i++){
-		for(int j = 0; j < size; j++){
-			grid[i][j] = 0;
-		}
-	}
 }

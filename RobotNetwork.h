@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define GRID_SIZE 10
+#define GRID_SIZE 15
 #define SENSOR_RANGE 3
 
 class RobotNetwork: public Robot {
@@ -18,7 +18,7 @@ private:
 	int num_robots;
 	long steps_to_success;
 	// Vector to hold robots' coordinates and state
-	std::vector< Robot > robots;
+	std::vector< Robot* > robots;
 	bool updateMap(int r);
 	void pulseSensor(int x, int y, int d, int r);
 
