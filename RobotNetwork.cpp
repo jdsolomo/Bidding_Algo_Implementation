@@ -1,3 +1,7 @@
+// This class is the main container in the system.  It maintains all of the robots
+// in the system and the absolute map.  It is also where the random movement algorithm
+// is implemented and where object and edge of map avoidance algorithms are implemented.
+
 #include "RobotNetwork.h"
 
 RobotNetwork::RobotNetwork():
@@ -107,6 +111,7 @@ bool RobotNetwork::updateMap(int r){
 	world_grid.changeCellValue(robots[r]->x, robots[r]->y, 1);
 	robots[r]->robot_grid.changeCellValue(robots[r]->x, robots[r]->y, 1);
 	pulseSensor(robots[r]->x, robots[r]->y, SENSOR_RANGE, r);
+	shareMap(r);
 	robots[r]->robot_grid.findFrontiers();
 	world_grid.findFrontiers();
 
@@ -129,4 +134,19 @@ void RobotNetwork::pulseSensor(int x, int y, int d, int r){
 	pulseSensor(x - 1, y, d - 1, r);
 	pulseSensor(x, y + 1, d - 1, r);
 	pulseSensor(x, y - 1, d - 1, r);
+}
+
+void RobotNetwork::shareMap(int r){
+	for(int i = 0; i < num_robots; i++){
+		if(withinRange(r,i)){
+			robots[i]->combineMaps(robots[r]->robot_grid);
+			robots[r]->combineMaps(robots[r]->robot_grid);
+		}
+	}
+}
+
+bool RobotNetwork::withinRange(int a, int b){
+	if(a == b) return false;
+	if((robots[a]->x - robots[b]->x) * (robots[a]->x - robots[b]->x) + (robots[a]->y - robots[b]->y) * (robots[a]->y - robots[b]->y) > COMM_RANGE * COMM_RANGE) return false;
+	return true;
 }

@@ -10,6 +10,7 @@
 
 #define GRID_SIZE 5
 #define SENSOR_RANGE 3
+#define COMM_RANGE 4
 
 class RobotNetwork: public Robot {
 
@@ -21,6 +22,8 @@ private:
 	std::vector< Robot* > robots;
 	bool updateMap(int r);
 	void pulseSensor(int x, int y, int d, int r);
+	void shareMap(int r);
+	bool withinRange(int a, int b);
 
 public:
 	RobotNetwork();

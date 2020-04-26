@@ -1,3 +1,6 @@
+// This class contains a 2D grid that will be the map for the RobotNetwork and Robots.
+// It contains methods to display the map, change map cell values, and create frontiers
+
 #include "OccGrid.h"
 
 // Create an occupancy grid of size 1 filled with zeros
