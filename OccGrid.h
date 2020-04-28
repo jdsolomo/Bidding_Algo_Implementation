@@ -1,5 +1,6 @@
 #ifndef OCCGRID_H
 #define OCCGRID_H
+#include "Misc.h"
 #include <iostream>
 
 class OccGrid {

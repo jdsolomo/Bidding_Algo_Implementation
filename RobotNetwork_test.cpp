@@ -3,5 +3,5 @@
 
 int main(){
 	RobotNetwork my_robots(2);
-	my_robots.exploreGrid_Random();
+	my_robots.exploreGrid_Bidding();
 }

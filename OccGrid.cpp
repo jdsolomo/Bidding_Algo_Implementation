@@ -82,7 +82,7 @@ void OccGrid::changeCellValue(int x, int y, int val){
 bool OccGrid::gridExplored(){
 	for(int i = 0; i < size; i++){
 		for(int j = 0; j < size; j++){
-			if(grid[i][j] != 1){
+			if(grid[i][j] != 1 && grid[i][j] != 3 && grid[i][j] != 2){
 				return false;
 			}
 		}
@@ -99,7 +99,7 @@ int OccGrid::getCellValue(int x, int y){
 void OccGrid::findFrontiers(){
 	for(int i = 0; i < size; i++){
 		for(int j = 0; j < size; j++){
-			if(grid[i][j] == 0 && checkFrontier(i,j)){
+			if(grid[i][j] == 1 && checkFrontier(i,j)){
 				grid[i][j] = 2;
 			}
 		}
@@ -110,34 +110,34 @@ void OccGrid::findFrontiers(){
 bool OccGrid::checkFrontier(int x, int y){
 	if(x == size - 1){
 		if(y == size - 1){
-			if(grid[x-1][y] == 1 || grid[x][y-1] == 1) return true;
+			if(grid[x-1][y] == 0 || grid[x][y-1] == 0) return true;
 			else return false;
 		}
 		else if(y == 0){
-			if(grid[x-1][y] == 1 || grid[x][y+1] == 1) return true;
+			if(grid[x-1][y] == 0 || grid[x][y+1] == 0) return true;
 			else return false;
 		}
 		else{
-			if(grid[x-1][y] == 1 || grid[x][y-1] == 1 || grid[x][y+1] == 1) return true;
+			if(grid[x-1][y] == 0 || grid[x][y-1] == 0 || grid[x][y+1] == 0) return true;
 			else return false;
 		}
 	}
 	else if(x == 0){
 		if(y == size - 1){
-			if(grid[x+1][y] == 1 || grid[x][y-1] == 1) return true;
+			if(grid[x+1][y] == 0 || grid[x][y-1] == 0) return true;
 			else return false;
 		}
 		else if(y == 0){
-			if(grid[x+1][y] == 1 || grid[x][y+1] == 1) return true;
+			if(grid[x+1][y] == 0 || grid[x][y+1] == 0) return true;
 			else return false;
 		}
 		else{
-			if(grid[x+1][y] == 1 || grid[x][y-1] == 1 || grid[x][y+1] == 1) return true;
+			if(grid[x+1][y] == 0 || grid[x][y-1] == 0 || grid[x][y+1] == 0) return true;
 			else return false;
 		}
 	}
 	else{
-		if(grid[x+1][y] == 1 || grid[x-1][y] == 1 || grid[x][y+1] == 1 || grid[x][y-1] == 1) return true;
+		if(grid[x+1][y] == 0 || grid[x-1][y] == 0 || grid[x][y+1] == 0 || grid[x][y-1] == 0) return true;
 		else return false;
 	}
 }

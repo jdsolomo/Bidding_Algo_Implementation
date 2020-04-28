@@ -1,5 +1,6 @@
 #ifndef ROBOT_NETWORK_H
 #define ROBOT_NETWORK_H
+#include "Misc.h"
 #include "OccGrid.h"
 #include "Robot.h"
 #include <vector>
@@ -9,8 +10,6 @@
 #include <time.h>
 
 #define GRID_SIZE 5
-#define SENSOR_RANGE 3
-#define COMM_RANGE 4
 
 class RobotNetwork: public Robot {
 
@@ -24,12 +23,14 @@ private:
 	void pulseSensor(int x, int y, int d, int r);
 	void shareMap(int r);
 	bool withinRange(int a, int b);
+	int moveTo(int x, int y, int r);
 
 public:
 	RobotNetwork();
 	RobotNetwork(int n);
 	~RobotNetwork();
 	void exploreGrid_Random();
+	void exploreGrid_Bidding();
 };
 
 #endif
