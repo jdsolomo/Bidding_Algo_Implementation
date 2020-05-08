@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define GRID_SIZE 5
+#define GRID_SIZE 10
 
 class RobotNetwork: public Robot {
 
@@ -24,12 +24,15 @@ private:
 	void shareMap(int r);
 	bool withinRange(int a, int b);
 	int moveTo(int x, int y, int r);
+	bool checkMove(int r);
+	void takeScan(int r);
 
 public:
 	RobotNetwork();
 	RobotNetwork(int n);
 	~RobotNetwork();
 	void exploreGrid_Random();
+	void exploreGrid_BiddingLite();
 	void exploreGrid_Bidding();
 };
 
