@@ -4,11 +4,11 @@
 #include "OccGrid.h"
 #include <vector>
 
-#define OMEGA1 0.5
-#define OMEGA2 0.5
-#define OMEGA3 0.5
+#define OMEGA1 1
+#define OMEGA2 1
+#define OMEGA3 0
 #define SENSOR_RANGE 2
-#define COMM_RANGE 20
+#define COMM_RANGE 29
 #define ALPHA 0.50
 
 

@@ -172,7 +172,6 @@ void RobotNetwork::exploreGrid_Bidding(){
 					robots[i]->goal_x = outer_bid.first.first;
 					robots[i]->goal_y = outer_bid.first.second;
 					robots[i]->state = 2;
-					std::cout << "Robot " << i + 1 << " goal: (" << robots[i]->goal_x << "," << robots[i]->goal_y << ")\n";
 				}
 				is_bigger_bid = false;
 			}
@@ -224,6 +223,7 @@ void RobotNetwork::exploreGrid_Bidding(){
 
 		std::cout << "World Grid:\n";
 		world_grid.printGrid();
+		// sleep(1);
 	}
 
 	std::cout << "It took the Bidding Algorithm " << steps_to_success << " distance steps and " << time_steps << " time steps to cover the space.\n";
@@ -269,14 +269,14 @@ bool RobotNetwork::updateMap(int r){
 
 // Check if robot r's move was valid (for full algorithm)
 bool RobotNetwork::checkMove(int r){
-	for(int i = 0; i < num_robots; i++){
-		if(r != i && robots[i]->x == robots[r]->x && robots[i]->y == robots[r]->y){
-			std::cout << "Error: Robot " << r + 1 << " will hit Robot " << i + 1 << "\n";
-			robots[r]->x = robots[r]->prev_x;
-			robots[r]->y = robots[r]->prev_y;
-			return false;
-		}
-	}
+	// for(int i = 0; i < num_robots; i++){
+	// 	if(r != i && robots[i]->x == robots[r]->x && robots[i]->y == robots[r]->y){
+	// 		std::cout << "Error: Robot " << r + 1 << " will hit Robot " << i + 1 << "\n";
+	// 		robots[r]->x = robots[r]->prev_x;
+	// 		robots[r]->y = robots[r]->prev_y;
+	// 		return false;
+	// 	}
+	// }
 	// Check that the robot is within the bounds of the map
 	if(robots[r]->x == GRID_SIZE || robots[r]->x == -1 || robots[r]->y == GRID_SIZE || robots[r]->y == -1){
 		std::cout << "Error: Robot " << r + 1 << " will be Out-Of-Bounds\n";

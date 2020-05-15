@@ -102,6 +102,9 @@ void OccGrid::findFrontiers(){
 			if(grid[i][j] == 1 && checkFrontier(i,j)){
 				grid[i][j] = 2;
 			}
+			if(grid[i][j] == 2 && !checkFrontier(i,j)){
+				grid[i][j] = 1;
+			}
 		}
 	}
 }
@@ -137,7 +140,15 @@ bool OccGrid::checkFrontier(int x, int y){
 		}
 	}
 	else{
-		if(grid[x+1][y] == 0 || grid[x-1][y] == 0 || grid[x][y+1] == 0 || grid[x][y-1] == 0) return true;
+		if(y == size - 1){
+			if(grid[x+1][y] == 0 || grid[x-1][y] == 0 || grid[x][y-1] == 0) return true;
+			else return false;
+		}
+		else if(y == 0){
+			if(grid[x+1][y] == 0 || grid[x-1][y] == 0 || grid[x][y+1] == 0) return true;
+			else return false;
+		}
+		else if(grid[x+1][y] == 0 || grid[x-1][y] == 0 || grid[x][y+1] == 0 || grid[x][y-1] == 0) return true;
 		else return false;
 	}
 }

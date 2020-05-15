@@ -8,8 +8,9 @@
 #include <utility>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
-#define GRID_SIZE 10
+#define GRID_SIZE 20
 
 class RobotNetwork: public Robot {
 

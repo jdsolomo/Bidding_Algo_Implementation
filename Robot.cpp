@@ -108,11 +108,31 @@ bool Robot::otherRobotsNearby(int x, int y, const std::vector< Robot* >& robots)
 // Finds the "nearness" measure of a robot if it were to travel to a cell (x,y)
 double Robot::getLambda(int x, int y, const std::vector< Robot* >& robots){
 	double lambda = 0.0;
-	int count = 0;
-	int len = robots.size();
+	int count = 0, max_bot = 0, len = robots.size();
+	double max = 0.0, cur_distance = 0.0;
+	std::vector< Robot* > ordered_bots, unordered_bots;
+
+	// Order the bots from farthest to closest
 	for(int i = 0; i < len; i++){
-		if((robots[i]->x != this->x || robots[i]->y != this->y) && ceil(getDistance(x, y, robots[i]->goal_x, robots[i]->goal_y)) <= COMM_RANGE){
-			lambda += pow(ALPHA, count) * exp(-1 * getDistance(robots[i]->goal_x, robots[i]->goal_y, x, y) / COMM_RANGE);
+		unordered_bots.push_back(robots[i]);
+	}
+	for(int i = 0; i < len; i++){
+		for(int j = 0; j < unordered_bots.size(); j++){
+			cur_distance = getDistance(x, y, unordered_bots[j]->goal_x, unordered_bots[j]->goal_y);
+			if(cur_distance >= max){
+				max_bot = j;
+				max = cur_distance;
+			}
+		}
+		ordered_bots.push_back(unordered_bots[max_bot]);
+		unordered_bots.erase(unordered_bots.begin() + max_bot);
+		max_bot = 0;
+		max = 0.0;
+	}
+
+	for(int i = len - 1; i >= 0; i--){
+		if((ordered_bots[i]->x != this->x || ordered_bots[i]->y != this->y) && ceil(getDistance(x, y, ordered_bots[i]->goal_x, ordered_bots[i]->goal_y)) <= COMM_RANGE){
+			lambda += pow(ALPHA, count) * exp(-1 * getDistance(ordered_bots[i]->goal_x, ordered_bots[i]->goal_y, x, y) / COMM_RANGE);
 			count++;
 		}
 	}
